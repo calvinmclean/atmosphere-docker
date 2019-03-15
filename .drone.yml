@@ -3,7 +3,7 @@ kind: pipeline
 name: default
 
 steps:
-  - name: cyvers
+  - name: cyverse
     image: ubuntu:18.04
     commands:
       - apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
@@ -12,6 +12,7 @@ steps:
       - apt-get update && apt-get install -y docker-ce docker-ce-cli
       - curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
       - chmod +x /usr/local/bin/docker-compose
+      - docker-compose pull
       - git clone https://github.com/cyverse/atmosphere.git ../atmosphere
       - git clone https://github.com/cyverse/atmosphere-ansible.git ../atmosphere-ansible
       - git clone https://github.com/cyverse/troposphere.git ../troposphere
