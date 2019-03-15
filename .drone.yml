@@ -1,0 +1,9 @@
+
+kind: pipeline
+name: default
+
+steps:
+  - name: cyverse
+    image: ubuntu:14.04
+    commands:
+      - docker-compose up
