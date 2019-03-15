@@ -16,6 +16,8 @@ steps:
       - git clone https://github.com/cyverse/atmosphere.git ../atmosphere
       - git clone https://github.com/cyverse/atmosphere-ansible.git ../atmosphere-ansible
       - git clone https://github.com/cyverse/troposphere.git ../troposphere
+      - pwd
+      - ls ..
       - docker-compose up
     volumes:
       - name: docker
