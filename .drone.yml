@@ -3,7 +3,7 @@ kind: pipeline
 name: default
 
 steps:
-  - name: cyverse
+  - name: cyvers
     image: ubuntu:14.04
     commands:
       - docker-compose up
