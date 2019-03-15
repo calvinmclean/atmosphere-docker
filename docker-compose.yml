@@ -4,8 +4,7 @@ version: '3'
 services:
 
   postgres:
-    build:
-      context: './postgres'
+    build: './postgres'
     environment:
       POSTGRES_USER: 'atmo_app'
       POSTGRES_PASSWORD: 'atmosphere'
@@ -13,8 +12,8 @@ services:
       TROPO_DB_NAME: 'troposphere'
 
   atmosphere:
-    build:
-      context: './atmosphere'
+    build: './atmosphere'
+    image: 'calvinmclean/atmosphere'
     volumes:
       - '../atmosphere:/opt/dev/atmosphere'
       - '../atmosphere-ansible:/opt/dev/atmosphere-ansible'
@@ -23,8 +22,8 @@ services:
       - 'postgres'
 
   troposphere:
-    build:
-      context: './troposphere'
+    build: './troposphere'
+    image: 'calvinmclean/troposphere'
     volumes:
       - '../troposphere:/opt/dev/troposphere'
       - '../atmosphere-docker-secrets:/opt/dev/atmosphere-docker-secrets'
