@@ -4,6 +4,20 @@ name: default
 
 steps:
   - name: cyverse
-    image: ubuntu:14.04
+    image: ubuntu:18.04
     commands:
+      - apt-get update && apt-get install -y apt-transport-https ca-certificates curl gnupg-agent software-properties-common
+      - curl -fsSL https://download.docker.com/linux/ubuntu/gpg | apt-key add -
+      - add-apt-repository "deb [arch=amd64] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable"
+      - apt-get update && apt-get install -y docker-ce docker-ce-cli
+      - curl -L "https://github.com/docker/compose/releases/download/1.23.2/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose
+      - chmod +x /usr/local/bin/docker-compose
       - docker-compose up
+    volumes:
+      - name: docker
+        path: /var/run/docker.sock
+
+volumes:
+  - name: docker
+    host:
+      path: /var/run/docker.sock
