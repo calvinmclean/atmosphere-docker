@@ -69,6 +69,7 @@ RUN useradd user
 COPY web_shell_no_gateone.yml /opt/web_shell_no_gateone.yml
 COPY ssh.config /root/.ssh/config
 COPY entrypoint.sh /root/entrypoint.sh
+COPY test.sh /root/test.sh
 RUN chmod +x /root/entrypoint.sh
 WORKDIR /opt/dev/atmosphere
 RUN echo "source /opt/env/atmo/bin/activate" >> /root/.bashrc
