@@ -13,5 +13,6 @@ services:
 
   sut:
     context: .
-    entrypoint: /root/test.sh
-    depends_on: 'postgres'
+    entrypoint: '/root/test.sh'
+    depends_on:
+      - 'postgres'
