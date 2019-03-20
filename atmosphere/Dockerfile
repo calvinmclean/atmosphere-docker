@@ -71,6 +71,7 @@ COPY ssh.config /root/.ssh/config
 COPY entrypoint.sh /root/entrypoint.sh
 COPY test.sh /root/test.sh
 RUN chmod +x /root/entrypoint.sh
+RUN chmod +x /root/test.sh
 WORKDIR /opt/dev/atmosphere
 RUN echo "source /opt/env/atmo/bin/activate" >> /root/.bashrc
 ENTRYPOINT ["/root/entrypoint.sh"]
