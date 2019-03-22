@@ -1,10 +1,9 @@
 #!/bin/bash
 
+which python
+
 git clone https://github.com/cyverse/atmosphere.git /opt/dev/atmosphere
 cd /opt/dev/atmosphere
-
-# Setup Atmosphere
-source /opt/env/atmo/bin/activate
 
 # Wait for DB to be active
 echo "Waiting for postgres..."

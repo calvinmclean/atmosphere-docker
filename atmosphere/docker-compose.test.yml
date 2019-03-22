@@ -13,6 +13,6 @@ services:
 
   sut:
     build: .
-    entrypoint: '/root/test.sh'
+    entrypoint: 'source /opt/env/atmo/bin/activate && /root/test.sh'
     depends_on:
       - 'postgres'
