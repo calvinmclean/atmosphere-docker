@@ -7,7 +7,7 @@ cd /opt/dev/atmosphere
 echo "Waiting for postgres..."
 while ! nc -z postgres 5432; do sleep 5; done
 
-apt-get install -y postgresql python-pip
+apt-get update && apt-get install -y postgresql python-pip
 
 pip install pip-tools
 
@@ -16,8 +16,8 @@ psql -c "CREATE DATABASE atmosphere_db WITH OWNER atmosphere_db_user;" -U postgr
 
 ./travis/check_properly_generated_requirements.sh
 pip-sync requirements.txt
-cp ./variables.ini.dist ./variables.ini
 sed -i "s/DATABASE_HOST = localhost/DATABASE_HOST = postgres/" variables.ini.dist
+cp ./variables.ini.dist ./variables.ini
 ./configure
 python manage.py check
 python manage.py makemigrations --dry-run --check
