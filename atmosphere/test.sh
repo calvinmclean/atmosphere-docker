@@ -25,9 +25,6 @@ patch variables.ini variables_for_testing_cyverse.ini.patch
 ./configure
 pip-sync dev_requirements.txt
 ./travis/check_for_dead_code_with_vulture.sh
-yapf --diff -p -- $(git ls-files | grep '\.py$')
-prospector --profile prospector_profile.yaml --messages-only -- $(git ls-files | grep '\.py$')
 python manage.py test --keepdb --noinput --settings=atmosphere.settings
-python manage.py behave --keepdb --tags ~@skip-if-cyverse --settings=atmosphere.settings --format rerun --outfile rerun_failing.features
 if [ -f "rerun_failing.features" ]; then python manage.py behave --logging-level DEBUG --capture-stderr --capture --verbosity 3 --keepdb @rerun_failing.features; fi
 python manage.py makemigrations --dry-run --check
