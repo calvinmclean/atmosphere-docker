@@ -9,7 +9,8 @@ while ! nc -z postgres 5432; do sleep 5; done
 
 apt-get update && apt-get install -y postgresql python-pip
 
-pip install pip-tools
+pip install -U pip==9.0.3 setuptools
+pip install pip-tools==1.11.0
 
 psql -c "CREATE USER atmosphere_db_user WITH PASSWORD 'atmosphere_db_pass' CREATEDB;" -U postgres -h postgres
 psql -c "CREATE DATABASE atmosphere_db WITH OWNER atmosphere_db_user;" -U postgres -h postgres
@@ -25,6 +26,9 @@ patch variables.ini variables_for_testing_cyverse.ini.patch
 ./configure
 pip-sync dev_requirements.txt
 ./travis/check_for_dead_code_with_vulture.sh
+yapf --diff -p -- $(git ls-files | grep '\.py$')
+prospector --profile prospector_profile.yaml --messages-only -- $(git ls-files | grep '\.py$')
 python manage.py test --keepdb --noinput --settings=atmosphere.settings
+python manage.py behave --keepdb --tags ~@skip-if-cyverse --settings=atmosphere.settings --format rerun --outfile rerun_failing.features
 if [ -f "rerun_failing.features" ]; then python manage.py behave --logging-level DEBUG --capture-stderr --capture --verbosity 3 --keepdb @rerun_failing.features; fi
 python manage.py makemigrations --dry-run --check
