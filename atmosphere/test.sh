@@ -7,7 +7,9 @@ cd /opt/dev/atmosphere
 echo "Waiting for postgres..."
 while ! nc -z postgres 5432; do sleep 5; done
 
-apt-get install -y postgres
+apt-get install -y postgresql python-pip
+
+pip install pip-tools
 
 psql -c "CREATE USER atmosphere_db_user WITH PASSWORD 'atmosphere_db_pass' CREATEDB;" -U postgres -h postgres
 psql -c "CREATE DATABASE atmosphere_db WITH OWNER atmosphere_db_user;" -U postgres -h postgres
