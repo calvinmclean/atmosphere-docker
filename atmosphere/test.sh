@@ -8,6 +8,7 @@ echo "Waiting for postgres..."
 while ! nc -z postgres 5432; do sleep 5; done
 
 apt-get update && apt-get install -y postgresql python-pip
+service redis-server start
 
 pip install -U pip==9.0.3 setuptools
 pip install pip-tools==1.11.0
