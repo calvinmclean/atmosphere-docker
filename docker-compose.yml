@@ -28,6 +28,14 @@ services:
       - '../atmosphere-docker-secrets:/opt/dev/atmosphere-docker-secrets'
     depends_on:
       - 'atmosphere'
+
+  nginx:
+    build:
+      context: './nginx'
+    volumes:
+      - '../atmosphere-docker-secrets:/opt/dev/atmosphere-docker-secrets'
     ports:
       - '443:443'
       - '80:80'
+    depends_on:
+      - 'troposphere'
